@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*******************************************************
+ * Copyright (C) 2015-2011 Marco Carettoni
+ * 
+ * This file is part of AutoCasterPro.
+ * 
+ ******************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
