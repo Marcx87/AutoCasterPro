@@ -119,11 +119,22 @@ namespace com.marcocarettoni.AutoCasterPro
                 ((Spell)listaA[0]).DELAY_MS = timebetweencycle;
             }
 
+            lblRiassunto.Text = "";
+
+            lblRiassunto.Text = "Starting Delay: " + btnStartingDelay.Text + " ms" + Environment.NewLine + Environment.NewLine;
+            lblRiassunto.Text += "Active Spells: " + Environment.NewLine + Environment.NewLine;
+            for (int i = 0; i < listaA.Count; i++)
+            {
+                lblRiassunto.Text += "Spell: " + (i + 1) + " - Button: " + ((Spell)listaA[i]).BUTTON + " - Delay: " + ((Spell)listaA[i]).DELAY_MS + " ms" + Environment.NewLine;
+            }
+
+
             currentIndex = 0;
             stop = false;
             button1.Enabled = false;
             button2.Enabled = true;
-                
+
+            lblCurrentSpell.Text = "First Spell in: " + btnStartingDelay.Text + " ms";
             Timer tmr1 = new Timer();
             tmr1.Interval = Int32.Parse(btnStartingDelay.Text);
             tmr1.Tick += sendTimerHandler;
@@ -145,6 +156,7 @@ namespace com.marcocarettoni.AutoCasterPro
                 delay = ((Spell)listaA[currentIndex]).DELAY_MS;
             }
 
+            lblCurrentSpell.Text += delay + " ms";
             Timer tmr1 = new Timer();
             tmr1.Interval = (delay+1);
             tmr1.Tick += sendTimerHandler;
@@ -156,14 +168,16 @@ namespace com.marcocarettoni.AutoCasterPro
             ((Timer)sender).Stop();
             String btn = ((Spell)listaA[currentIndex]).BUTTON;
             SendKeys.Send(btn);
-
+           
             if (!stop)
             {
+                lblCurrentSpell.Text = "Current Spell Button: #" + btn + Environment.NewLine +"Next Spell in: ";
                 currentIndex++;
                 sendTimer();
             }
             else
             {
+                lblCurrentSpell.Text = "Stopped";
                 button1.Enabled = true;
             }
         }
@@ -275,7 +289,7 @@ namespace com.marcocarettoni.AutoCasterPro
                     readStream.Close();
                 }
             }
-            catch (Exception err) { }
+            catch (Exception) { }
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -348,7 +362,6 @@ namespace com.marcocarettoni.AutoCasterPro
         {
             checkConfigExists();
 
-
             chkCheckUpdate.Checked = (ConfigurationManager.AppSettings["CheckForUpdateOnStartup"] == "1");
 
             btnStartingDelay.Text = ConfigurationManager.AppSettings["startingDelay"];
@@ -405,7 +418,6 @@ namespace com.marcocarettoni.AutoCasterPro
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
-            
             config.AppSettings.Settings["CheckForUpdateOnStartup"].Value = (chkCheckUpdate.Checked ? "1" : "0");
             config.AppSettings.Settings["startingDelay"].Value = btnStartingDelay.Text;
             config.AppSettings.Settings["ManaSec"].Value = btnManaSecond.Text;
@@ -441,6 +453,44 @@ namespace com.marcocarettoni.AutoCasterPro
             ConfigurationManager.RefreshSection("appSettings");
 
             MessageBox.Show("Save completed.");
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            showNewChanges();
+        }
+
+        public void showNewChanges()
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            if (ConfigurationManager.AppSettings["NewsUpdated"] == null)
+            {                
+                config.AppSettings.Settings.Add(new KeyValueConfigurationElement("NewsUpdated", Application.ProductVersion));
+                config.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection("appSettings");
+                showChangesPopUp();
+            }
+            else
+            {
+                if (ConfigurationManager.AppSettings["NewsUpdated"] != Application.ProductVersion)
+                {
+                    config.AppSettings.Settings["NewsUpdated"].Value = Application.ProductVersion;
+                    showChangesPopUp();
+                }
+            }
+        }
+
+        private void whatsNewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showChangesPopUp();
+        }
+
+        private void showChangesPopUp()
+        {
+           Form2 f = new Form2();
+           f.Show();
+           f.BringToFront();
         }
     }
 }

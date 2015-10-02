@@ -61,6 +61,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkVersionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.whatsNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.chkWaitFullMana5 = new System.Windows.Forms.CheckBox();
@@ -81,16 +82,22 @@
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.btnButton5 = new System.Windows.Forms.TextBox();
             this.chkCheckUpdate = new System.Windows.Forms.CheckBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lblCurrentSpell = new System.Windows.Forms.Label();
+            this.lblRiassunto = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(9, 311);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.Location = new System.Drawing.Point(12, 308);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(273, 47);
+            this.button1.Size = new System.Drawing.Size(412, 47);
             this.button1.TabIndex = 0;
             this.button1.Text = "Start";
             this.button1.UseVisualStyleBackColor = true;
@@ -98,10 +105,11 @@
             // 
             // button2
             // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(288, 311);
+            this.button2.Location = new System.Drawing.Point(436, 308);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(273, 47);
+            this.button2.Size = new System.Drawing.Size(411, 47);
             this.button2.TabIndex = 1;
             this.button2.Text = "Stop";
             this.button2.UseVisualStyleBackColor = true;
@@ -343,7 +351,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(567, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(859, 24);
             this.menuStrip1.TabIndex = 29;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -375,6 +383,7 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.donateToolStripMenuItem,
             this.checkVersionToolStripMenuItem,
+            this.whatsNewToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
@@ -393,6 +402,13 @@
             this.checkVersionToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.checkVersionToolStripMenuItem.Text = "Check Version";
             this.checkVersionToolStripMenuItem.Click += new System.EventHandler(this.checkVersionToolStripMenuItem_Click);
+            // 
+            // whatsNewToolStripMenuItem
+            // 
+            this.whatsNewToolStripMenuItem.Name = "whatsNewToolStripMenuItem";
+            this.whatsNewToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.whatsNewToolStripMenuItem.Text = "What\'s New";
+            this.whatsNewToolStripMenuItem.Click += new System.EventHandler(this.whatsNewToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -444,9 +460,10 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
+            this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton1.Location = new System.Drawing.Point(162, 71);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(102, 17);
+            this.radioButton1.Size = new System.Drawing.Size(128, 19);
             this.radioButton1.TabIndex = 31;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Automatic Delay";
@@ -456,9 +473,10 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(391, 71);
+            this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton2.Location = new System.Drawing.Point(387, 71);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(112, 17);
+            this.radioButton2.Size = new System.Drawing.Size(146, 19);
             this.radioButton2.TabIndex = 32;
             this.radioButton2.Text = "Manual Delay (ms)";
             this.radioButton2.UseVisualStyleBackColor = true;
@@ -587,18 +605,56 @@
             // chkCheckUpdate
             // 
             this.chkCheckUpdate.AutoSize = true;
-            this.chkCheckUpdate.Location = new System.Drawing.Point(398, 5);
+            this.chkCheckUpdate.Location = new System.Drawing.Point(686, 4);
             this.chkCheckUpdate.Name = "chkCheckUpdate";
             this.chkCheckUpdate.Size = new System.Drawing.Size(169, 17);
             this.chkCheckUpdate.TabIndex = 35;
             this.chkCheckUpdate.Text = "Check For Update On StartUp";
             this.chkCheckUpdate.UseVisualStyleBackColor = true;
             // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.lblCurrentSpell);
+            this.panel3.Controls.Add(this.lblRiassunto);
+            this.panel3.Location = new System.Drawing.Point(561, 39);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(284, 252);
+            this.panel3.TabIndex = 36;
+            // 
+            // lblCurrentSpell
+            // 
+            this.lblCurrentSpell.AutoSize = true;
+            this.lblCurrentSpell.Location = new System.Drawing.Point(20, 209);
+            this.lblCurrentSpell.Name = "lblCurrentSpell";
+            this.lblCurrentSpell.Size = new System.Drawing.Size(0, 13);
+            this.lblCurrentSpell.TabIndex = 1;
+            // 
+            // lblRiassunto
+            // 
+            this.lblRiassunto.AutoSize = true;
+            this.lblRiassunto.Location = new System.Drawing.Point(20, 17);
+            this.lblRiassunto.Name = "lblRiassunto";
+            this.lblRiassunto.Size = new System.Drawing.Size(0, 13);
+            this.lblRiassunto.TabIndex = 0;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(568, 29);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(67, 15);
+            this.label11.TabIndex = 37;
+            this.label11.Text = "Summary";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(567, 370);
+            this.ClientSize = new System.Drawing.Size(859, 367);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.chkCheckUpdate);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.checkBox5);
@@ -624,16 +680,20 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "AutoCaster PRO";
+            this.Shown += new System.EventHandler(this.Form1_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -694,6 +754,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.CheckBox chkCheckUpdate;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label lblRiassunto;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblCurrentSpell;
+        private System.Windows.Forms.ToolStripMenuItem whatsNewToolStripMenuItem;
     }
 }
 
